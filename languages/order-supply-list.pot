@@ -1,0 +1,128 @@
+# Copyright (C) 2024 Your Name
+# This file is distributed under the GPL-2.0+ license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Order Supply List 1.6.7\n"
+"Report-Msgid-Bugs-To: https://yourwebsite.com\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: WP-CLI 2.x\n"
+"X-Domain: order-supply-list\n"
+
+#. translators: %d: number of active orders
+#: order-supply-list.php
+msgid "%d active order"
+msgid_plural "%d active orders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: order-supply-list.php
+msgid "Order Supply List"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Order Supply"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Refreshing…"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Permission denied."
+msgstr ""
+
+#: order-supply-list.php
+msgid "WooCommerce is not active."
+msgstr ""
+
+#: order-supply-list.php
+msgid "Updated:"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Refresh"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Print"
+msgstr ""
+
+#: order-supply-list.php
+msgid "From:"
+msgstr ""
+
+#: order-supply-list.php
+msgid "To"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Apply Filter"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Clear"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Date:"
+msgstr ""
+
+#: order-supply-list.php
+msgid "orders"
+msgstr ""
+
+#: order-supply-list.php
+msgid "No active orders found."
+msgstr ""
+
+#: order-supply-list.php
+msgid "Total:"
+msgstr ""
+
+#: order-supply-list.php
+msgid "units"
+msgstr ""
+
+#: order-supply-list.php
+msgid "#"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Image"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Product"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Variation"
+msgstr ""
+
+#: order-supply-list.php
+msgid "SKU"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Qty"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Total —"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Invalid \"From\" date. Use format: %s"
+msgstr ""
+
+#: order-supply-list.php
+msgid "Invalid \"To\" date. Use format: %s"
+msgstr ""

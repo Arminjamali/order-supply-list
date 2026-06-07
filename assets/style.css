@@ -1,0 +1,404 @@
+/* Order Supply List — v1.6.7
+   License: GPLv2 or later */
+
+/* ── Vazirmatn font (local fallback stack — no external request) ── */
+#osl-root {
+    font-family: 'Vazirmatn', 'IRANSans', Tahoma, Arial, sans-serif;
+    direction: inherit;
+    color: #1a1a1a;
+    padding: 20px 20px 40px;
+    background: #f5f6f8;
+    min-height: 100vh;
+}
+#osl-root * { box-sizing: border-box; font-family: inherit; }
+#osl-root[dir="rtl"] { direction: rtl; text-align: right; }
+#osl-root[dir="ltr"] { direction: ltr; text-align: left; font-family: Arial, Helvetica, sans-serif; }
+
+/* ── Toolbar ── */
+.osl-toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+}
+.osl-toolbar__left h1 { font-size: 17px; font-weight: 700; margin: 0 0 4px; }
+.osl-meta { font-size: 12px; color: #777; }
+.osl-toolbar__right { display: flex; gap: 8px; }
+.osl-btn {
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+    color: #333;
+    font-family: inherit;
+}
+.osl-btn--print   { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+.osl-btn--refresh { background: #fff; color: #333; }
+.osl-btn--print:hover   { background: #1e40af; }
+.osl-btn--refresh:hover { background: #f5f5f5; }
+
+/* ── Filter bar ── */
+.osl-filter-bar { margin-bottom: 16px; }
+.osl-dp-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+.osl-dp-wrap label { font-size: 12px; color: #555; font-weight: 600; }
+.osl-dp-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 13px;
+    width: 130px;
+    font-family: inherit;
+}
+.osl-dp-sep { font-size: 12px; color: #777; }
+.osl-dp-apply {
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+.osl-dp-apply:hover { background: #1e40af; }
+.osl-dp-clear { font-size: 12px; color: #999; text-decoration: none; }
+.osl-dp-clear:hover { color: #dc2626; }
+
+/* ── Category block ── */
+.osl-cat {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+.osl-cat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: #f0f4ff;
+    border-bottom: 1px solid #d0d9f0;
+}
+.osl-cat-name  { font-size: 14px; font-weight: 700; color: #1e3a8a; }
+.osl-cat-total { font-size: 12px; color: #555; font-weight: 600; }
+
+/* ── Table ── */
+.osl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    direction: inherit;
+}
+#osl-root[dir="rtl"] .osl-table { direction: rtl; }
+#osl-root[dir="ltr"] .osl-table { direction: ltr; }
+.osl-table thead tr { background: #f9fafb; }
+.osl-table th {
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #555;
+    text-align: inherit;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+.osl-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+.osl-table tbody tr:last-child td { border-bottom: none; }
+.osl-table tbody tr:hover         { background: #fafbff; }
+
+/* Column widths */
+.th-num, .td-num { width: 36px; text-align: center; color: #999; font-size: 11px; }
+.th-img, .td-img { width: 58px; text-align: center; }
+.th-qty, .td-qty { width: 80px; text-align: center; font-weight: 700; font-size: 14px; color: #dc2626; }
+.th-sku, .td-sku { font-family: monospace; font-size: 11px; color: #777; }
+.td-name         { font-weight: 600; }
+
+.osl-thumb {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ── Sub-category row ── */
+.osl-subcat-row td {
+    background: #f8f9fa;
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 6px 12px;
+}
+.td-subcat-qty {
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #555;
+}
+
+/* ── Table footer ── */
+.osl-foot td {
+    background: #f0f4ff;
+    font-weight: 700;
+    font-size: 12px;
+    border-top: 2px solid #d0d9f0;
+    padding: 8px 12px;
+}
+.td-foot-label { color: #1e3a8a; }
+
+/* ── Notices ── */
+.osl-notice {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    border: 1px solid transparent;
+}
+.osl-notice--warning {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+.osl-notice--error {
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #991b1b;
+}
+
+/* ── Empty / error states ── */
+.osl-empty, .osl-error {
+    padding: 24px;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+.osl-error { color: #dc2626; }
+
+
+.osl-print-caption {
+    display: none;
+}
+
+/* ══════════════════════════════════════════
+   Print styles
+══════════════════════════════════════════ */
+.print-only { display: none; }
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 8mm;
+    }
+
+    html,
+    body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        color: #000 !important;
+    }
+
+    /* Hide the whole WordPress admin UI and all plugin controls first. */
+    body * {
+        visibility: hidden !important;
+    }
+
+    #adminmenumain,
+    #adminmenuwrap,
+    #adminmenuback,
+    #wpadminbar,
+    #wpfooter,
+    #screen-meta,
+    #screen-meta-links,
+    .notice,
+    .update-nag,
+    .updated,
+    .error,
+    jdp-container,
+    jdp-overlay,
+    .jdp-container,
+    .jdp-overlay {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Print only the report tables. */
+    #osl-root,
+    #osl-content,
+    #osl-content .osl-cat,
+    #osl-content .osl-table,
+    #osl-content .osl-table * {
+        visibility: visible !important;
+    }
+
+    #osl-root .no-print,
+    #osl-root .print-only,
+    #osl-root .osl-toolbar,
+    #osl-root .osl-filter-bar,
+    #osl-root .osl-print-head,
+    #osl-root .osl-notice,
+    #osl-root .osl-empty,
+    #osl-root .osl-error,
+    #osl-root .osl-cat-head,
+    #osl-root > :not(#osl-content),
+    #osl-content > :not(.osl-cat),
+    #osl-content .osl-cat > :not(.osl-table) {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    #wpcontent,
+    #wpbody,
+    #wpbody-content,
+    .wrap,
+    #osl-root,
+    #osl-content {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        border: 0 !important;
+    }
+
+    #osl-root {
+        font-family: Tahoma, Arial, sans-serif !important;
+    }
+
+    #osl-root[dir="ltr"] {
+        direction: ltr !important;
+        text-align: left !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    #osl-root[dir="rtl"] {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    .osl-cat {
+        display: block !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        margin: 0 0 10mm !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+        box-shadow: none !important;
+    }
+
+    .osl-table {
+        display: table !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+        table-layout: fixed !important;
+        font-size: 10px !important;
+        color: #000 !important;
+        background: #fff !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .osl-print-caption {
+        display: table-caption !important;
+        caption-side: top !important;
+        text-align: inherit !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        padding: 0 0 4px !important;
+        color: #000 !important;
+        visibility: visible !important;
+    }
+
+    .osl-table thead {
+        display: table-header-group !important;
+    }
+
+    .osl-table tbody {
+        display: table-row-group !important;
+    }
+
+    .osl-table tfoot {
+        display: table-footer-group !important;
+    }
+
+    .osl-table tr {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .osl-table th,
+    .osl-table td,
+    .osl-subcat-row td,
+    .osl-foot td {
+        border: 1px solid #777 !important;
+        padding: 4px 5px !important;
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 10px !important;
+        line-height: 1.35 !important;
+        vertical-align: middle !important;
+    }
+
+    .osl-table th {
+        font-weight: 700 !important;
+    }
+
+    .th-num, .td-num { width: 30px !important; text-align: center !important; }
+    .th-img, .td-img { width: 46px !important; text-align: center !important; }
+    .th-qty, .td-qty { width: 54px !important; text-align: center !important; font-weight: 700 !important; }
+    .th-sku, .td-sku { width: 82px !important; font-size: 9px !important; }
+    .th-var, .td-var { width: 90px !important; }
+
+    .osl-thumb {
+        width: 28px !important;
+        height: 28px !important;
+        object-fit: cover !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+    }
+}
+
+
+.osl-print-head-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.osl-print-head-title { font-size: 18px; font-weight: 700; }
+#osl-root[dir="rtl"] .osl-print-head-meta  { text-align: left; }
+#osl-root[dir="ltr"] .osl-print-head-meta  { text-align: right; }
+.osl-print-head-meta  { font-size: 11px; color: #555; }
